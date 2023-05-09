@@ -1,6 +1,7 @@
 import React from 'react';
-import {View, Button, StyleSheet} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import useAuth from '../../context/useAuth';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const SettingsScreen = ({navigation}) => {
   const {setIsAuth} = useAuth();
@@ -13,13 +14,19 @@ const SettingsScreen = ({navigation}) => {
     navigation.setOptions({
       // eslint-disable-next-line react/no-unstable-nested-components
       headerRight: () => (
-        <Button onPress={() => navigation.navigate('Help')} title="Help" />
+        <TouchableOpacity
+          style={styles.setting}
+          onPress={() => navigation.navigate('Help')}>
+          <AntDesign name="setting" size={30} color={'#1486ff'} />
+        </TouchableOpacity>
       ),
     });
   }, [navigation]);
   return (
     <View style={styles.master}>
-      <Button title="Log out" onPress={() => logout()} />
+      <TouchableOpacity style={styles.btn} onPress={() => logout()}>
+        <Text style={styles.btnText}>Log out</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -32,6 +39,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   btn: {
-    marginBottom: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 2,
+    marginBottom: 40,
+    height: 50,
+    marginHorizontal: 10,
+    paddingHorizontal: 15,
+    borderWidth: 1,
+    borderRadius: 100,
+    borderColor: '#1486ff',
+  },
+  btnText: {
+    fontSize: 20,
+  },
+  setting: {
+    marginRight: 10,
   },
 });

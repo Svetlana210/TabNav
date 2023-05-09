@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Button} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import useAuth from '../../context/useAuth';
 
 const ProfileScreen = ({navigation}) => {
@@ -8,18 +8,21 @@ const ProfileScreen = ({navigation}) => {
     <View style={styles.master}>
       <Text style={styles.text}>It is a profile of {authUser.email}!</Text>
       <View>
-        <Button
-          title="Go to photos"
-          onPress={() => navigation.navigate('Photos')}
-        />
-        <Button
-          title="Go to music"
-          onPress={() => navigation.navigate('Music')}
-        />
-        <Button
-          title="Go to video"
-          onPress={() => navigation.navigate('Video')}
-        />
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => navigation.navigate('Photos')}>
+          <Text style={styles.btnText}>Go to photos</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => navigation.navigate('Music')}>
+          <Text style={styles.btnText}>Go to music</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => navigation.navigate('Video')}>
+          <Text style={styles.btnText}>Go to video</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -36,5 +39,20 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 26,
     marginTop: 16,
+  },
+  btn: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 2,
+    marginBottom: 40,
+    height: 50,
+    marginHorizontal: 10,
+    paddingHorizontal: 15,
+    borderWidth: 1,
+    borderRadius: 100,
+    borderColor: '#1486ff',
+  },
+  btnText: {
+    fontSize: 20,
   },
 });

@@ -5,8 +5,6 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import {Button} from 'react-native';
-
 import RegisterScreen from './screens/auth/RegisterScreen';
 import LoginScreen from './screens/auth/LoginScreen';
 import HomeScreen from './screens/main/HomeScreen';
@@ -84,8 +82,8 @@ const Nest = () => {
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: 'tomato',
-        tabBarInactiveTintColor: 'gray',
+        tabBarActiveTintColor: '#1486ff',
+        tabBarInactiveTintColor: '#1e292e',
         tabBarShowLabel: false,
       })}>
       <NestTab.Screen
@@ -105,8 +103,6 @@ const Nest = () => {
         component={SettingsScreen}
         options={{
           title: 'My settings',
-          // eslint-disable-next-line react/no-unstable-nested-components
-          headerRight: () => <Button title="Help" />,
         }}
       />
     </NestTab.Navigator>
@@ -136,8 +132,6 @@ const Navigation = () => {
               component={RegisterScreen}
               options={{
                 title: 'Register Form',
-                // eslint-disable-next-line react/no-unstable-nested-components
-                headerRight: () => <Button title="Help" />,
                 headerBackTitleVisible: false,
               }}
             />

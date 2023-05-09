@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable no-alert */
 import React, {useState} from 'react';
 
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import {Input, Button} from 'react-native-elements';
 import useAuth from '../../context/useAuth';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const RegisterScreen = ({navigation}) => {
   const [email, setEmail] = useState(null);
@@ -17,14 +17,18 @@ const RegisterScreen = ({navigation}) => {
       setIsAuth(true);
       setAuthUser({email, password});
     } else {
-      alert('Fill in all inputs');
+      Alert.alert('Fill in all inputs');
     }
   };
 
   React.useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Button onPress={() => navigation.navigate('Help')} title="Help" />
+        <TouchableOpacity
+          style={styles.setting}
+          onPress={() => navigation.navigate('Help')}>
+          <AntDesign name="setting" size={30} color={'#1486ff'} />
+        </TouchableOpacity>
       ),
     });
   }, [navigation]);

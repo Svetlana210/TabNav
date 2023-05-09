@@ -1,7 +1,6 @@
-/* eslint-disable no-alert */
 import React, {useState} from 'react';
 
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import {Input, Button} from 'react-native-elements';
 import useAuth from '../../context/useAuth';
 
@@ -16,7 +15,7 @@ const LoginScreen = ({navigation}) => {
       setIsAuth(true);
       setAuthUser({email, password});
     } else {
-      alert('Fill in all inputs');
+      Alert.alert('Fill in all inputs');
     }
   };
 

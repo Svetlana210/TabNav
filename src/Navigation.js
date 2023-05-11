@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
+import {NoteContext} from './context/noteContext';
 import RegisterScreen from './screens/auth/RegisterScreen';
 import LoginScreen from './screens/auth/LoginScreen';
 import HomeScreen from './screens/main/HomeScreen';
@@ -12,67 +15,54 @@ import ProfileScreen from './screens/main/ProfileScreen';
 import SettingsScreen from './screens/main/SettingsScreen';
 import HelpScreen from './screens/shared/HelpScreen';
 import AboutScreen from './screens/shared/AboutScreen';
-import PhotoScreen from './screens/nests/PhotoScreen';
-import MusicScreen from './screens/nests/MusicScreen';
-import VideoScreen from './screens/nests/VideoScreen';
+import AddNoteScreen from './screens/nests/AddNoteScreen';
+import AllNoteScreen from './screens/nests/AllNoteScreen';
 
 import useAuth from './context/useAuth';
 
 const Stack = createNativeStackNavigator();
-const NestTab = createBottomTabNavigator();
+const MainTab = createBottomTabNavigator();
 const HelpTab = createMaterialTopTabNavigator();
-const MainStack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
-const Helping = () => {
-  const {isAuth} = useAuth();
+const DrawerStack = () => {
   return (
-    <HelpTab.Navigator navigationKey={isAuth ? 'true' : 'false'}>
-      <HelpTab.Screen
-        name="Helping"
-        component={HelpScreen}
-        options={{title: 'Help'}}
+    <Drawer.Navigator>
+      <Drawer.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          title: 'My home',
+        }}
       />
-      <HelpTab.Screen name="About" component={AboutScreen} />
-    </HelpTab.Navigator>
+      <Drawer.Screen
+        name="Add"
+        component={AddNoteScreen}
+        options={{
+          title: 'Add Note',
+        }}
+      />
+      <Drawer.Screen
+        name="All"
+        component={AllNoteScreen}
+        options={{
+          title: 'All Notes',
+        }}
+      />
+    </Drawer.Navigator>
   );
 };
 
 const Main = () => {
+  const {notes} = useContext(NoteContext);
   return (
-    <MainStack.Navigator>
-      <MainStack.Screen
-        name="MyProfile"
-        component={Nest}
-        options={{headerShown: false}}
-      />
-      <MainStack.Screen
-        name="Photos"
-        component={PhotoScreen}
-        options={{title: 'My photos'}}
-      />
-      <MainStack.Screen
-        name="Video"
-        component={VideoScreen}
-        options={{title: 'My videos'}}
-      />
-      <MainStack.Screen
-        name="Music"
-        component={MusicScreen}
-        options={{title: 'My music'}}
-      />
-    </MainStack.Navigator>
-  );
-};
-
-const Nest = () => {
-  return (
-    <NestTab.Navigator
+    <MainTab.Navigator
       screenOptions={({route}) => ({
         // eslint-disable-next-line react/no-unstable-nested-components
         tabBarIcon: ({color, size}) => {
           let iconName;
 
-          if (route.name === 'Home') {
+          if (route.name === 'Drawer') {
             iconName = 'home';
           } else if (route.name === 'Settings') {
             iconName = 'list';
@@ -86,26 +76,41 @@ const Nest = () => {
         tabBarInactiveTintColor: '#1e292e',
         tabBarShowLabel: false,
       })}>
-      <NestTab.Screen
-        name="Home"
-        component={HomeScreen}
+      <MainTab.Screen
+        name="Drawer"
+        component={DrawerStack}
         options={{
-          title: 'My home',
+          headerShown: false,
         }}
       />
-      <NestTab.Screen
+      <MainTab.Screen
         name="Profile"
         component={ProfileScreen}
         options={{title: 'My profile'}}
+        initialParams={{length: notes.length}}
       />
-      <NestTab.Screen
+      <MainTab.Screen
         name="Settings"
         component={SettingsScreen}
         options={{
           title: 'My settings',
         }}
       />
-    </NestTab.Navigator>
+    </MainTab.Navigator>
+  );
+};
+
+const Helping = () => {
+  const {isAuth} = useAuth();
+  return (
+    <HelpTab.Navigator navigationKey={isAuth ? 'true' : 'false'}>
+      <HelpTab.Screen
+        name="Helping"
+        component={HelpScreen}
+        options={{title: 'Help'}}
+      />
+      <HelpTab.Screen name="About" component={AboutScreen} />
+    </HelpTab.Navigator>
   );
 };
 

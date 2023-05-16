@@ -4,11 +4,7 @@ import useAuth from '../../context/useAuth';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const SettingsScreen = ({navigation}) => {
-  const {setIsAuth} = useAuth();
-
-  const logout = () => {
-    setIsAuth(false);
-  };
+  const {logout} = useAuth();
 
   React.useEffect(() => {
     navigation.setOptions({
@@ -24,7 +20,7 @@ const SettingsScreen = ({navigation}) => {
   }, [navigation]);
   return (
     <View style={styles.master}>
-      <TouchableOpacity style={styles.btn} onPress={() => logout()}>
+      <TouchableOpacity style={styles.btn} onPress={logout}>
         <Text style={styles.btnText}>Log out</Text>
       </TouchableOpacity>
     </View>

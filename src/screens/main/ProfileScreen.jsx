@@ -3,11 +3,11 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import useAuth from '../../context/useAuth';
 
 const ProfileScreen = ({navigation, route}) => {
-  const {authUser} = useAuth();
+  const {userInfo} = useAuth();
   console.log('render Profile');
   return (
     <View style={styles.master}>
-      <Text style={styles.text}>It is a profile of {authUser.email}!</Text>
+      <Text style={styles.text}>It is a profile of {userInfo.user.name}!</Text>
       <Text style={styles.text}>You have {route.params?.length} notes</Text>
       <View>
         <TouchableOpacity

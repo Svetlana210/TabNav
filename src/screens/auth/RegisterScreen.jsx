@@ -1,24 +1,21 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React, {useState} from 'react';
 
-import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import Spinner from 'react-native-loading-spinner-overlay/lib';
 import {Input, Button} from 'react-native-elements';
 import useAuth from '../../context/useAuth';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const RegisterScreen = ({navigation}) => {
+  const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
-  const {setAuthUser, setIsAuth} = useAuth();
+  const {register, isLoading} = useAuth();
 
   const signup = e => {
-    if (email && password) {
-      e.preventDefault();
-      setIsAuth(true);
-      setAuthUser({email, password});
-    } else {
-      Alert.alert('Fill in all inputs');
-    }
+    e.preventDefault();
+    register(name, email, password);
   };
 
   React.useEffect(() => {
@@ -35,7 +32,9 @@ const RegisterScreen = ({navigation}) => {
 
   return (
     <View style={styles.master}>
+      <Spinner visible={isLoading} />
       <Text style={styles.header}>Sign Up</Text>
+      <Input placeholder="Name" onChangeText={setName} value={name} />
       <Input placeholder="Email" onChangeText={setEmail} value={email} />
       <Input
         placeholder="Password"

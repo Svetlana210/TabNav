@@ -101,9 +101,10 @@ const Main = () => {
 };
 
 const Helping = () => {
-  const {isAuth} = useAuth();
+  const {userInfo} = useAuth();
+  // const {isAuth} = useAuth();
   return (
-    <HelpTab.Navigator navigationKey={isAuth ? 'true' : 'false'}>
+    <HelpTab.Navigator navigationKey={userInfo.token ? 'true' : 'false'}>
       <HelpTab.Screen
         name="Helping"
         component={HelpScreen}
@@ -115,11 +116,11 @@ const Helping = () => {
 };
 
 const Navigation = () => {
-  const {isAuth} = useAuth();
+  const {userInfo} = useAuth();
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {isAuth ? (
+        {userInfo.token ? (
           <Stack.Screen
             name="Main"
             component={Main}

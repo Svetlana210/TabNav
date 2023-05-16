@@ -1,26 +1,24 @@
 import React, {useState} from 'react';
 
-import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import Spinner from 'react-native-loading-spinner-overlay/lib';
 import {Input, Button} from 'react-native-elements';
 import useAuth from '../../context/useAuth';
 
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const {setAuthUser, setIsAuth} = useAuth();
+  const {login, isLoading} = useAuth();
 
-  const login = e => {
-    if (email ?? password) {
-      e.preventDefault();
-      setIsAuth(true);
-      setAuthUser({email, password});
-    } else {
-      Alert.alert('Fill in all inputs');
-    }
+  const signIn = e => {
+    e.preventDefault();
+
+    login(email, password);
   };
 
   return (
     <View style={styles.master}>
+      <Spinner visible={isLoading} />
       <Text style={styles.header}>Sign In</Text>
       <Input placeholder="Email" onChangeText={setEmail} value={email} />
       <Input
@@ -32,7 +30,7 @@ const LoginScreen = ({navigation}) => {
       <Button
         title="Sign in"
         onPress={e => {
-          login(e);
+          signIn(e);
         }}
       />
       <View style={styles.link}>

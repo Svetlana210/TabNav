@@ -21,12 +21,11 @@ const AuthProvider = ({children}) => {
         setUserInfo(userData);
         console.log(userData);
         AsyncStorage.setItem('userInfo', JSON.stringify(userData));
-        setIsLoading(false);
       })
       .catch(e => {
-        console.log('register error');
-        setIsLoading(false);
+        console.log(`register error - ${e}`);
       });
+    setIsLoading(false);
   };
 
   const login = (email, password) => {
@@ -41,12 +40,11 @@ const AuthProvider = ({children}) => {
         setUserInfo(userData);
         console.log(userData);
         AsyncStorage.setItem('userInfo', JSON.stringify(userData));
-        setIsLoading(false);
       })
       .catch(e => {
         console.log(`register error - ${e}`);
-        setIsLoading(false);
       });
+    setIsLoading(false);
   };
 
   const logout = () => {
@@ -61,12 +59,11 @@ const AuthProvider = ({children}) => {
         console.log(res.data);
         AsyncStorage.removeItem('userInfo');
         setUserInfo({});
-        setIsLoading(false);
       })
       .catch(e => {
         console.log(`register error - ${e}`);
-        setIsLoading(false);
       });
+    setIsLoading(false);
   };
 
   const isLoggedIn = async () => {

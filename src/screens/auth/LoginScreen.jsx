@@ -20,12 +20,21 @@ const LoginScreen = ({navigation}) => {
     <View style={styles.master}>
       <Spinner visible={isLoading} />
       <Text style={styles.header}>Sign In</Text>
-      <Input placeholder="Email" onChangeText={setEmail} value={email} />
+      <Input
+        autoCorrect={false}
+        autoCapitalize="none"
+        keyboardType="email-address"
+        placeholder="Email"
+        onChangeText={setEmail}
+        value={email}
+      />
       <Input
         placeholder="Password"
         onChangeText={setPassword}
         value={password}
         secureTextEntry
+        autoCorrect={false}
+        autoCapitalize="none"
       />
       <Button
         title="Sign in"

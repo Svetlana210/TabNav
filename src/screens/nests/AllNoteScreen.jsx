@@ -1,11 +1,14 @@
 import React, {useContext} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-
+import {useSelector} from 'react-redux';
 import List from '../../components/List';
-import {NoteContext} from '../../context/noteContext';
+
+// import {NoteContext} from '../../context/noteContext';
 
 const AllNoteScreen = ({navigation, route}) => {
-  const {notes} = useContext(NoteContext);
+  const notes = useSelector(state => state.noteReducer.noteList);
+
+  // const {notes} = useContext(NoteContext);
   console.log('render AllNotesScreen');
   return (
     <View style={styles.master}>

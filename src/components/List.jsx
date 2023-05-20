@@ -4,7 +4,7 @@ import ListItem from './ListItem';
 
 const List = ({list}) => {
   const renderItem = itemData => {
-    return <ListItem item={itemData.item.text} />;
+    return <ListItem item={itemData.item.name} id={itemData.item.id} />;
   };
   return (
     <View style={styles.container}>

@@ -15,7 +15,7 @@ const RegisterScreen = ({navigation}) => {
 
   const signup = e => {
     e.preventDefault();
-    register(name, email, password);
+    register({name, email, password});
   };
 
   React.useEffect(() => {
@@ -34,13 +34,28 @@ const RegisterScreen = ({navigation}) => {
     <View style={styles.master}>
       <Spinner visible={isLoading} />
       <Text style={styles.header}>Sign Up</Text>
-      <Input placeholder="Name" onChangeText={setName} value={name} />
-      <Input placeholder="Email" onChangeText={setEmail} value={email} />
+      <Input
+        placeholder="Name"
+        onChangeText={setName}
+        value={name}
+        autoCorrect={false}
+        autoCapitalize="none"
+      />
+      <Input
+        placeholder="Email"
+        onChangeText={setEmail}
+        value={email}
+        autoCorrect={false}
+        autoCapitalize="none"
+        keyboardType="email-address"
+      />
       <Input
         placeholder="Password"
         onChangeText={setPassword}
         value={password}
         secureTextEntry
+        autoCorrect={false}
+        autoCapitalize="none"
       />
       <Button
         title="Sign up"

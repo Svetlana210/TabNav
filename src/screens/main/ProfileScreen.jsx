@@ -1,13 +1,16 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import useAuth from '../../context/useAuth';
+// import useAuth from '../../context/useAuth';
+import {useSelector} from 'react-redux';
+import {getUser} from '../../redux/auth/authSelectors';
 
 const ProfileScreen = ({navigation, route}) => {
-  const {userInfo} = useAuth();
+  // const {userInfo} = useAuth();
+  const {name} = useSelector(getUser);
   console.log('render Profile');
   return (
     <View style={styles.master}>
-      <Text style={styles.text}>It is a profile of {userInfo.user.name}!</Text>
+      <Text style={styles.text}>It is a profile of {name}!</Text>
       <Text style={styles.text}>You have {route.params?.length} notes</Text>
       <View>
         <TouchableOpacity

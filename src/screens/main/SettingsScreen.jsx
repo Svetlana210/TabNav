@@ -1,10 +1,18 @@
 import React from 'react';
 import {View, StyleSheet, TouchableOpacity, Text} from 'react-native';
-import useAuth from '../../context/useAuth';
+// import useAuth from '../../context/useAuth';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {useDispatch, useSelector} from 'react-redux';
+import {logout} from '../../redux/auth/authOperations';
 
 const SettingsScreen = ({navigation}) => {
-  const {logout} = useAuth();
+  // const {logout} = useAuth();
+  const dispatch = useDispatch();
+
+  const logOut = () => {
+    dispatch(logout());
+    console.log('logout');
+  };
 
   React.useEffect(() => {
     navigation.setOptions({
@@ -20,7 +28,7 @@ const SettingsScreen = ({navigation}) => {
   }, [navigation]);
   return (
     <View style={styles.master}>
-      <TouchableOpacity style={styles.btn} onPress={logout}>
+      <TouchableOpacity style={styles.btn} onPress={logOut}>
         <Text style={styles.btnText}>Log out</Text>
       </TouchableOpacity>
     </View>

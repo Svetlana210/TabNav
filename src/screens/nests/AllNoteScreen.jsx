@@ -6,7 +6,7 @@ import List from '../../components/List';
 // import {NoteContext} from '../../context/noteContext';
 
 const AllNoteScreen = ({navigation, route}) => {
-  const notes = useSelector(state => state.noteReducer.noteList);
+  const notes = useSelector(state => state.notes.noteList);
 
   // const {notes} = useContext(NoteContext);
   console.log('render AllNotesScreen');

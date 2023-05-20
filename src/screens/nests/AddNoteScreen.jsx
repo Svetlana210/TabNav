@@ -7,7 +7,7 @@ import {addNote} from '../../redux/notes/actions/note';
 
 const AddNoteScreen = ({navigation, route}) => {
   const dispatch = useDispatch();
-  const notes = useSelector(state => state.noteReducer.noteList);
+  const notes = useSelector(state => state.notes.noteList);
   // const {notes, setNotes} = useContext(NoteContext);
   const handleSubmit = text => {
     dispatch(addNote(text));

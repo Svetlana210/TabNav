@@ -6,8 +6,8 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
-import {NoteContext} from './context/noteContext';
+import {useSelector} from 'react-redux';
+// import {NoteContext} from './context/noteContext';
 import RegisterScreen from './screens/auth/RegisterScreen';
 import LoginScreen from './screens/auth/LoginScreen';
 import HomeScreen from './screens/main/HomeScreen';
@@ -17,8 +17,9 @@ import HelpScreen from './screens/shared/HelpScreen';
 import AboutScreen from './screens/shared/AboutScreen';
 import AddNoteScreen from './screens/nests/AddNoteScreen';
 import AllNoteScreen from './screens/nests/AllNoteScreen';
+import {getAuth} from '../src/redux/auth/authSelectors';
 
-import useAuth from './context/useAuth';
+// import useAuth from './context/useAuth';
 
 const Stack = createNativeStackNavigator();
 const MainTab = createBottomTabNavigator();
@@ -54,7 +55,8 @@ const DrawerStack = () => {
 };
 
 const Main = () => {
-  const {notes} = useContext(NoteContext);
+  // const { notes } = useContext(NoteContext);
+  const notes = useSelector(state => state.notes.noteList);
   return (
     <MainTab.Navigator
       screenOptions={({route}) => ({
@@ -101,10 +103,11 @@ const Main = () => {
 };
 
 const Helping = () => {
-  const {userInfo} = useAuth();
+  const {token} = useSelector(getAuth);
+  // const {userInfo} = useAuth();
   // const {isAuth} = useAuth();
   return (
-    <HelpTab.Navigator navigationKey={userInfo.token ? 'true' : 'false'}>
+    <HelpTab.Navigator navigationKey={token ? 'true' : 'false'}>
       <HelpTab.Screen
         name="Helping"
         component={HelpScreen}
@@ -116,11 +119,12 @@ const Helping = () => {
 };
 
 const Navigation = () => {
-  const {userInfo} = useAuth();
+  const {token} = useSelector(getAuth);
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {userInfo.token ? (
+        {token ? (
           <Stack.Screen
             name="Main"
             component={Main}

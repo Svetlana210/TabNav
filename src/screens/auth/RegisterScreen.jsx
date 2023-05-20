@@ -1,21 +1,25 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React, {useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {signup} from '../../redux/auth/authOperations';
 
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import Spinner from 'react-native-loading-spinner-overlay/lib';
+// import Spinner from 'react-native-loading-spinner-overlay/lib';
 import {Input, Button} from 'react-native-elements';
-import useAuth from '../../context/useAuth';
+// import useAuth from '../../context/useAuth';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const RegisterScreen = ({navigation}) => {
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
-  const {register, isLoading} = useAuth();
+  // const {register, isLoading} = useAuth();
 
-  const signup = e => {
+  const dispatch = useDispatch();
+
+  const signUp = e => {
     e.preventDefault();
-    register({name, email, password});
+    dispatch(signup({name, email, password}));
   };
 
   React.useEffect(() => {
@@ -32,7 +36,7 @@ const RegisterScreen = ({navigation}) => {
 
   return (
     <View style={styles.master}>
-      <Spinner visible={isLoading} />
+      {/* <Spinner visible={isLoading} /> */}
       <Text style={styles.header}>Sign Up</Text>
       <Input
         placeholder="Name"
@@ -60,7 +64,7 @@ const RegisterScreen = ({navigation}) => {
       <Button
         title="Sign up"
         onPress={e => {
-          signup(e);
+          signUp(e);
         }}
       />
       <View style={styles.link}>

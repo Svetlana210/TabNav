@@ -1,24 +1,26 @@
 import React, {useState} from 'react';
-
+import {useDispatch} from 'react-redux';
+import {login} from '../../redux/auth/authOperations';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import Spinner from 'react-native-loading-spinner-overlay/lib';
+// import Spinner from 'react-native-loading-spinner-overlay/lib';
 import {Input, Button} from 'react-native-elements';
-import useAuth from '../../context/useAuth';
+// import useAuth from '../../context/useAuth';
 
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const {login, isLoading} = useAuth();
+  // const {isLoading} = useAuth();
+
+  const dispatch = useDispatch();
 
   const signIn = e => {
     e.preventDefault();
-
-    login(email, password);
+    dispatch(login({email, password}));
   };
 
   return (
     <View style={styles.master}>
-      <Spinner visible={isLoading} />
+      {/* <Spinner visible={isLoading} /> */}
       <Text style={styles.header}>Sign In</Text>
       <Input
         autoCorrect={false}

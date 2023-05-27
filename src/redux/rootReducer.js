@@ -10,7 +10,6 @@ import {persistReducer} from 'redux-persist';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whiteList: ['token'],
 };
 const persistedAuthReducer = persistReducer(persistConfig, authReducer);
 // const persistedNotesReducer = persistReducer(persistConfig, noteReducer);

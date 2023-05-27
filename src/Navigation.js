@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -56,7 +56,8 @@ const DrawerStack = () => {
 
 const Main = () => {
   // const { notes } = useContext(NoteContext);
-  const notes = useSelector(state => state.notes.noteList);
+  const notes = useSelector(state => state.notes);
+  // console.log(notes);
   return (
     <MainTab.Navigator
       screenOptions={({route}) => ({
@@ -90,6 +91,7 @@ const Main = () => {
         component={ProfileScreen}
         options={{title: 'My profile'}}
         initialParams={{length: notes.length}}
+        // initialParams={{length: 1}}
       />
       <MainTab.Screen
         name="Settings"

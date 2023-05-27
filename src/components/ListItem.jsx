@@ -2,13 +2,13 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useDispatch} from 'react-redux';
-import {deleteNote} from '../redux/notes/actions/note';
+import {remove} from '../redux/notes/notesSlice';
 
 const ListItem = ({item, id}) => {
   const dispatch = useDispatch();
 
   const onDelete = () => {
-    dispatch(deleteNote(id));
+    dispatch(remove(id));
   };
   return (
     <View style={styles.listItem}>

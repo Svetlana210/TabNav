@@ -12,10 +12,10 @@
 import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
 import {persistStore} from 'redux-persist';
 
-import rootReducer from '../redux/rootReducer';
+import persistReducer from '../redux/rootReducer';
 
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: persistReducer,
   middleware: getDefaultMiddleware({
     serializableCheck: false,
   }),

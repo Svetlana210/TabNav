@@ -1,16 +1,16 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import AddNote from '../../components/AddNote';
 // import {NoteContext} from '../../context/noteContext';
 import {useDispatch, useSelector} from 'react-redux';
-import {addNote} from '../../redux/notes/actions/note';
+import {add} from '../../redux/notes/notesSlice';
 
 const AddNoteScreen = ({navigation, route}) => {
   const dispatch = useDispatch();
-  const notes = useSelector(state => state.notes.noteList);
+  const notes = useSelector(state => state.notes);
   // const {notes, setNotes} = useContext(NoteContext);
   const handleSubmit = text => {
-    dispatch(addNote(text));
+    dispatch(add(text));
   };
 
   return (

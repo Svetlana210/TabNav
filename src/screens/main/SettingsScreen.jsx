@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StyleSheet, TouchableOpacity, Text} from 'react-native';
 // import useAuth from '../../context/useAuth';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {logout} from '../../redux/auth/authOperations';
 
 const SettingsScreen = ({navigation}) => {
@@ -11,7 +11,7 @@ const SettingsScreen = ({navigation}) => {
 
   const logOut = () => {
     dispatch(logout());
-    console.log('logout');
+    // console.log('logout');
   };
 
   React.useEffect(() => {

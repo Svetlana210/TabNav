@@ -1,51 +1,22 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {fetchAllNotes, fetchAddNotes, fetchDeleteNote} from './notesOperations';
 
-const initialState = {
-  items: [],
-  loading: false,
-  error: null,
-};
+// const initialState = [];
 
-const contactSlice = createSlice({
+export const notesSlice = createSlice({
   name: 'notes',
-  initialState,
-  extraReducers: builder => {
-    builder
-      .addCase(fetchAllNotes.pending, store => {
-        store.loading = true;
-      })
-      .addCase(fetchAllNotes.fulfilled, (store, {payload}) => {
-        store.loading = false;
-        store.items = payload;
-      })
-      .addCase(fetchAllNotes.rejected, (store, {payload}) => {
-        store.loading = false;
-        store.error = payload;
-      })
-      .addCase(fetchAddNotes.pending, store => {
-        store.loading = true;
-      })
-      .addCase(fetchAddNotes.fulfilled, (store, {payload}) => {
-        store.fetchAddNotes = false;
-        store.items.push(payload);
-      })
-      .addCase(fetchAddNotes.rejected, (store, {payload}) => {
-        store.loading = false;
-        store.error = payload;
-      })
-      .addCase(fetchDeleteNote.pending, store => {
-        store.loading = true;
-      })
-      .addCase(fetchDeleteNote.fulfilled, (store, {payload}) => {
-        store.loading = false;
-        const index = store.items.findIndex(item => item.id === payload);
-        store.items.splice(index, 1);
-      })
-      .addCase(fetchDeleteNote.rejected, (store, {payload}) => {
-        store.loading = false;
-        store.error = payload;
-      });
+  initialState: [],
+  reducers: {
+    add(state, action) {
+      const newNote = {
+        id: Math.random(),
+        name: action.payload,
+      };
+      state.push(newNote);
+    },
+    remove(state, action) {
+      return state.filter(item => item.id !== action.payload);
+    },
   },
 });
-export default contactSlice.reducer;
+export default notesSlice.reducer;
+export const {add, remove} = notesSlice.actions;

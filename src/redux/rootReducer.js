@@ -2,7 +2,7 @@ import {combineReducers} from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import authReducer from './auth/authSlice';
-import noteReducer from './notes/reducers/noteReducer';
+import noteReducer from '../redux/notes/notesSlice';
 // import contactsReducer from './contacts/contacts-slice';
 import {persistReducer} from 'redux-persist';
 // import storage from 'redux-persist/lib/storage';
@@ -13,6 +13,7 @@ const persistConfig = {
   whiteList: ['token'],
 };
 const persistedAuthReducer = persistReducer(persistConfig, authReducer);
+// const persistedNotesReducer = persistReducer(persistConfig, noteReducer);
 
 const rootReducer = combineReducers({
   auth: persistedAuthReducer,

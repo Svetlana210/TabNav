@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {useSelector} from 'react-redux';
 import List from '../../components/List';
@@ -6,7 +6,7 @@ import List from '../../components/List';
 // import {NoteContext} from '../../context/noteContext';
 
 const AllNoteScreen = ({navigation, route}) => {
-  const notes = useSelector(state => state.notes.noteList);
+  const notes = useSelector(state => state.notes);
 
   // const {notes} = useContext(NoteContext);
   console.log('render AllNotesScreen');
